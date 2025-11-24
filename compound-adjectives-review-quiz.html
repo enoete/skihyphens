@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Compound Adjectives Adventure! 🚀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            border: 3px solid #ff6b6b;
+        }
+
+        .section h2 {
+            color: #e74c3c;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .important-rule {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 3px dashed #e74c3c;
+        }
+
+        .important-rule h3 {
+            color: #c0392b;
+            margin-bottom: 10px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .comparison-box {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .correct {
+            background: #d4edda;
+            border: 3px solid #28a745;
+        }
+
+        .incorrect {
+            background: #f8d7da;
+            border: 3px solid #dc3545;
+        }
+
+        .type-section {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 2px solid #9b59b6;
+        }
+
+        .type-section h3 {
+            color: #8e44ad;
+            margin-bottom: 10px;
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-header h2 {
+            font-size: 2em;
+            color: #d63031;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 3px solid #00b894;
+        }
+
+        .question h3 {
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #e0e0e0;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #74b9ff;
+            border-color: #0984e3;
+        }
+
+        .option.correct-answer {
+            background: #55efc4;
+            border-color: #00b894;
+        }
+
+        .option.wrong-answer {
+            background: #ff7675;
+            border-color: #d63031;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .drag-drop-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .drop-zone {
+            padding: 15px;
+            min-width: 150px;
+            min-height: 50px;
+            background: #dfe6e9;
+            border: 2px dashed #636e72;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .draggable {
+            padding: 10px 20px;
+            background: #74b9ff;
+            border-radius: 8px;
+            cursor: move;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: scale(1.05);
+        }
+
+        .results {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .results h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .score.excellent {
+            color: #27ae60;
+        }
+
+        .score.good {
+            color: #f39c12;
+        }
+
+        .score.needs-practice {
+            color: #e74c3c;
+        }
+
+        .feedback {
+            font-size: 1.3em;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .answer-review {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .answer-item {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .answer-item.correct {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .answer-item.incorrect {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
+
+        .sentence-builder {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 1.2em;
+        }
+
+        .word {
+            padding: 5px 8px;
+            background: white;
+            border-radius: 5px;
+            border: 2px solid #dfe6e9;
+        }
+
+        .hyphen-spot {
+            width: 30px;
+            height: 30px;
+            background: #e0e0e0;
+            border: 2px dashed #95a5a6;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .hyphen-spot:hover {
+            background: #d0d0d0;
+            transform: scale(1.1);
+        }
+
+        .hyphen-spot.clicked {
+            background: #74b9ff;
+            border-color: #0984e3;
+            border-style: solid;
+        }
+
+        .hyphen-spot.clicked::after {
+            content: '-';
+            font-size: 1.5em;
+        }
+
+        .hyphen-spot.correct-hyphen {
+            background: #55efc4;
+            border-color: #00b894;
+            border-style: solid;
+        }
+
+        .hyphen-spot.wrong-hyphen {
+            background: #ff7675;
+            border-color: #d63031;
+            border-style: solid;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="bounce">🎨 Compound Adjectives Adventure! 🚀</h1>
+            <p>Get ready to master hyphens and compound adjectives!</p>
+        </div>
+
+        <div class="content">
+            <!-- INTRODUCTION SECTION -->
+            <div class="section">
+                <h2>🎯 What Are Compound Adjectives?</h2>
+                <p><strong>A compound adjective</strong> is an adjective made up of <strong>two or more words</strong> joined together by a <strong>hyphen (-).</strong></p>
+                
+                <div class="example-box">
+                    <h4>🐊 Let's Look at an Example:</h4>
+                    <div class="comparison">
+                        <div class="comparison-box correct">
+                            <p><strong>✅ I saw a man-eating alligator.</strong></p>
+                            <p>This means: An alligator that eats people!</p>
+                        </div>
+                        <div class="comparison-box incorrect">
+                            <p><strong>❌ I saw a man eating alligator.</strong></p>
+                            <p>This means: A man who is eating an alligator!</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 15px;"><strong>See the difference? The hyphen matters!</strong></p>
+                </div>
+            </div>
+
+            <!-- IMPORTANT RULES SECTION -->
+            <div class="section">
+                <h2>📚 Super Important Rules!</h2>
+                
+                <div class="important-rule">
+                    <h3>⭐ RULE #1: Position Matters!</h3>
+                    <p><strong>BEFORE the noun:</strong> Use a hyphen ✅</p>
+                    <p style="margin-left: 20px;">Example: "He was a <strong>well-known</strong> author."</p>
+                    <br>
+                    <p><strong>AFTER the noun:</strong> Usually NO hyphen ❌</p>
+                    <p style="margin-left: 20px;">Example: "His works were <strong>well known</strong>."</p>
+                </div>
+
+                <div class="important-rule">
+                    <h3>⭐ RULE #2: The "-ly" Rule!</h3>
+                    <p><strong>DON'T use hyphens with "-ly" words</strong> because they're never confusing!</p>
+                    <p style="margin-left: 20px;">Example: "He was an <strong>impressively dressed</strong> man." (NO hyphen needed!)</p>
+                    <p style="margin-left: 20px;">Example: "They spoke a <strong>largely incoherent</strong> language." (NO hyphen needed!)</p>
+                </div>
+
+                <div class="important-rule">
+                    <h3>⭐ RULE #3: Singular Form in Compound Adjectives!</h3>
+                    <p>When using periods of time or numbers, always use the <strong>SINGULAR</strong> form!</p>
+                    <div style="margin-top: 10px;">
+                        <p>✅ "I had a <strong>three-week</strong> vacation."</p>
+                        <p>❌ "I had a three-weeks vacation." (WRONG!)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYPES OF COMPOUND ADJECTIVES -->
+            <div class="section">
+                <h2>🎨 Types of Compound Adjectives</h2>
+                
+                <div class="type-section">
+                    <h3>1️⃣ Number + Period of Time</h3>
+                    <p><strong>Examples:</strong> five-minute, three-hour, ten-day, six-month, twenty-year</p>
+                    <div class="example-box">
+                        <p>✅ I work an <strong>eight-hour</strong> day.</p>
+                        <p>✅ I had a <strong>three-week</strong> vacation.</p>
+                        <p>✅ There was a <strong>five-second</strong> delay.</p>
+                    </div>
+                </div>
+
+                <div class="type-section">
+                    <h3>2️⃣ Number + Singular Noun</h3>
+                    <p><strong>Examples:</strong> ten-page, one-way, two-storey</p>
+                    <div class="example-box">
+                        <p>✅ I printed a <strong>ten-page</strong> document.</p>
+                        <p>✅ Go down that <strong>one-way</strong> street.</p>
+                        <p>✅ We live in a <strong>two-storey</strong> house.</p>
+                    </div>
+                </div>
+
+                <div class="type-section">
+                    <h3>3️⃣ Adjective + Noun</h3>
+                    <p><strong>Examples:</strong> last-minute, full-length, short-term, long-distance</p>
+                    <div class="example-box">
+                        <p>✅ I made a <strong>last-minute</strong> decision.</p>
+                        <p>✅ They have <strong>short-term</strong> contracts.</p>
+                        <p>✅ We create <strong>high-quality</strong> resources.</p>
+                    </div>
+                </div>
+
+                <div class="type-section">
+                    <h3>4️⃣ Adjective + Present Participle (-ing word)</h3>
+                    <p><strong>Examples:</strong> good-looking, long-lasting, easy-going, quick-thinking</p>
+                    <div class="example-box">
+                        <p>✅ It left a <strong>long-lasting</strong> taste.</p>
+                        <p>✅ She wore <strong>tight-fitting</strong> jeans.</p>
+                        <p>✅ The <strong>quick-thinking</strong> staff helped everyone.</p>
+                    </div>
+                </div>
+
+                <div class="type-section">
+                    <h3>5️⃣ Noun + Present Participle (-ing word)</h3>
+                    <p><strong>Examples:</strong> mouth-watering, record-breaking, time-saving, English-speaking</p>
+                    <div class="example-box">
+                        <p>✅ I bought <strong>mouth-watering</strong> strawberries.</p>
+                        <p>✅ That was a <strong>record-breaking</strong> jump.</p>
+                        <p>✅ I lived in a <strong>Spanish-speaking</strong> country.</p>
+                    </div>
+                </div>
+
+                <div class="type-section">
+                    <h3>6️⃣ Noun + Adjective</h3>
+                    <p><strong>Examples:</strong> world-famous, smoke-free, ice-cold, gluten-free</p>
+                    <div class="example-box">
+                        <p>✅ We go to a <strong>family-friendly</strong> restaurant.</p>
+                        <p>✅ I love an <strong>ice-cold</strong> drink on hot days.</p>
+                        <p>✅ Could you buy <strong>gluten-free</strong> cookies?</p>
+                    </div>
+                </div>
+
+                <div class="type-section">
+                    <h3>7️⃣ Noun + Past Participle (-ed word)</h3>
+                    <p><strong>Examples:</strong> wind-powered, sun-dried, middle-aged, water-cooled</p>
+                    <div class="example-box">
+                        <p>✅ We use <strong>wind-powered</strong> generators.</p>
+                        <p>✅ I added <strong>sun-dried</strong> tomatoes.</p>
+                        <p>✅ My <strong>water-cooled</strong> gaming PC is quiet.</p>
+                    </div>
+                </div>
+
+                <div class="type-section">
+                    <h3>8️⃣ Adjective + Past Participle (-ed word)</h3>
+                    <p><strong>Examples:</strong> old-fashioned, long-forgotten, ready-made, short-lived</p>
+                    <div class="example-box">
+                        <p>✅ I found a <strong>long-forgotten</strong> painting.</p>
+                        <p>✅ He buys <strong>ready-made</strong> meals.</p>
+                        <p>✅ They had a <strong>short-lived</strong> romance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUICK TIPS -->
+            <div class="section">
+                <h2>💡 Quick Memory Tips!</h2>
+                <div class="example-box">
+                    <p>✨ <strong>Compound adjectives come BEFORE the noun they describe</strong></p>
+                    <p>✨ <strong>They act as ONE single idea or adjective</strong></p>
+                    <p>✨ <strong>Always use SINGULAR form (three-week, NOT three-weeks)</strong></p>
+                    <p>✨ <strong>NO hyphen with "-ly" words</strong></p>
+                    <p>✨ <strong>Position matters: before = hyphen, after = usually no hyphen</strong></p>
+                </div>
+            </div>
+
+            <!-- START QUIZ BUTTON -->
+            <div class="button-container">
+                <button class="btn btn-primary" onclick="scrollToQuiz()">🎮 Ready for the Quiz? Let's Go! 🎮</button>
+            </div>
+
+            <!-- QUIZ SECTION -->
+            <div class="quiz-container" id="quiz">
+                <div class="quiz-header">
+                    <h2>🏆 Ultimate Compound Adjectives Quiz! 🏆</h2>
+                    <p>Test everything you've learned! Let's see how well you know your hyphens! 💪</p>
+                </div>
+
+                <!-- Question 1 -->
+                <div class="question" id="q1">
+                    <h3>Question 1: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">She</span>
+                        <span class="word">is</span>
+                        <span class="word">my</span>
+                        <span class="word">sister</span>
+                        <span class="hyphen-spot" data-q="1" data-pos="0"></span>
+                        <span class="word">in</span>
+                        <span class="hyphen-spot" data-q="1" data-pos="1"></span>
+                        <span class="word">law.</span>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question" id="q2">
+                    <h3>Question 2: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">He</span>
+                        <span class="word">took</span>
+                        <span class="word">over</span>
+                        <span class="word">in</span>
+                        <span class="word">the</span>
+                        <span class="word">mid</span>
+                        <span class="hyphen-spot" data-q="2" data-pos="0"></span>
+                        <span class="word">1990s.</span>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question" id="q3">
+                    <h3>Question 3: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">My</span>
+                        <span class="word">mom</span>
+                        <span class="word">is</span>
+                        <span class="word">forty</span>
+                        <span class="hyphen-spot" data-q="3" data-pos="0"></span>
+                        <span class="word">two</span>
+                        <span class="hyphen-spot" data-q="3" data-pos="1"></span>
+                        <span class="word">years</span>
+                        <span class="word">old.</span>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question" id="q4">
+                    <h3>Question 4: Multiple Choice</h3>
+                    <p>Which sentence is correct?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(4, 0)">A) My three year old cousin threw a tantrum.</div>
+                        <div class="option" onclick="selectOption(4, 1)">B) My three-year-old cousin threw a tantrum.</div>
+                        <div class="option" onclick="selectOption(4, 2)">C) My three-year old cousin threw a tantrum.</div>
+                        <div class="option" onclick="selectOption(4, 3)">D) My threeyearold cousin threw a tantrum.</div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question" id="q5">
+                    <h3>Question 5: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">Three</span>
+                        <span class="hyphen-spot" data-q="5" data-pos="0"></span>
+                        <span class="word">fourths</span>
+                        <span class="hyphen-spot" data-q="5" data-pos="1"></span>
+                        <span class="word">of</span>
+                        <span class="word">our</span>
+                        <span class="word">class</span>
+                        <span class="word">missed</span>
+                        <span class="word">the</span>
+                        <span class="word">game.</span>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question" id="q6">
+                    <h3>Question 6: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">She</span>
+                        <span class="word">works</span>
+                        <span class="word">in</span>
+                        <span class="word">a</span>
+                        <span class="word">nine</span>
+                        <span class="hyphen-spot" data-q="6" data-pos="0"></span>
+                        <span class="word">story</span>
+                        <span class="hyphen-spot" data-q="6" data-pos="1"></span>
+                        <span class="word">building.</span>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question" id="q7">
+                    <h3>Question 7: Multiple Choice</h3>
+                    <p>What's the difference between these sentences?<br>
+                    • "I saw a man-eating tiger."<br>
+                    • "I saw a man eating tiger."</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(7, 0)">A) They mean the same thing</div>
+                        <div class="option" onclick="selectOption(7, 1)">B) First: tiger eats men. Second: man eats tiger.</div>
+                        <div class="option" onclick="selectOption(7, 2)">C) First: man eats tiger. Second: tiger eats men.</div>
+                        <div class="option" onclick="selectOption(7, 3)">D) The hyphen doesn't change the meaning</div>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question" id="q8">
+                    <h3>Question 8: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">Let's</span>
+                        <span class="word">take</span>
+                        <span class="word">a</span>
+                        <span class="word">ten</span>
+                        <span class="hyphen-spot" data-q="8" data-pos="0"></span>
+                        <span class="word">minute</span>
+                        <span class="hyphen-spot" data-q="8" data-pos="1"></span>
+                        <span class="word">break.</span>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question" id="q9">
+                    <h3>Question 9: Multiple Choice</h3>
+                    <p>Which is correct?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(9, 0)">A) Yeah, he's pretty self absorbed.</div>
+                        <div class="option" onclick="selectOption(9, 1)">B) Yeah, he's pretty self-absorbed.</div>
+                        <div class="option" onclick="selectOption(9, 2)">C) Yeah, he's pretty selfabsorbed.</div>
+                        <div class="option" onclick="selectOption(9, 3)">D) Yeah, he's pretty self - absorbed.</div>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question" id="q10">
+                    <h3>Question 10: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">Her</span>
+                        <span class="word">ex</span>
+                        <span class="hyphen-spot" data-q="10" data-pos="0"></span>
+                        <span class="word">boyfriend</span>
+                        <span class="hyphen-spot" data-q="10" data-pos="1"></span>
+                        <span class="word">moved</span>
+                        <span class="word">to</span>
+                        <span class="word">Canada.</span>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question" id="q11">
+                    <h3>Question 11: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">She</span>
+                        <span class="word">lived</span>
+                        <span class="word">during</span>
+                        <span class="word">the</span>
+                        <span class="word">fourth</span>
+                        <span class="hyphen-spot" data-q="11" data-pos="0"></span>
+                        <span class="word">century.</span>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question" id="q12">
+                    <h3>Question 12: True or False</h3>
+                    <p>We should use a hyphen with "-ly" words like "extremely well-dressed."</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(12, 0)">True</div>
+                        <div class="option" onclick="selectOption(12, 1)">False</div>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question" id="q13">
+                    <h3>Question 13: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">The</span>
+                        <span class="word">ice</span>
+                        <span class="hyphen-spot" data-q="13" data-pos="0"></span>
+                        <span class="word">cold</span>
+                        <span class="hyphen-spot" data-q="13" data-pos="1"></span>
+                        <span class="word">drink</span>
+                        <span class="word">was</span>
+                        <span class="word">refreshing.</span>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question" id="q14">
+                    <h3>Question 14: Multiple Choice</h3>
+                    <p>When compound adjectives come AFTER the noun, do we usually use hyphens?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(14, 0)">A) Yes, always</div>
+                        <div class="option" onclick="selectOption(14, 1)">B) No, usually not</div>
+                        <div class="option" onclick="selectOption(14, 2)">C) Only with numbers</div>
+                        <div class="option" onclick="selectOption(14, 3)">D) It depends on the day</div>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question" id="q15">
+                    <h3>Question 15: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">I</span>
+                        <span class="word">bought</span>
+                        <span class="word">mouth</span>
+                        <span class="hyphen-spot" data-q="15" data-pos="0"></span>
+                        <span class="word">watering</span>
+                        <span class="hyphen-spot" data-q="15" data-pos="1"></span>
+                        <span class="word">strawberries.</span>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question" id="q16">
+                    <h3>Question 16: Multiple Choice</h3>
+                    <p>Which is the correct way to write this compound adjective?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(16, 0)">A) She is a world famous singer.</div>
+                        <div class="option" onclick="selectOption(16, 1)">B) She is a world-famous singer.</div>
+                        <div class="option" onclick="selectOption(16, 2)">C) She is a worldfamous singer.</div>
+                        <div class="option" onclick="selectOption(16, 3)">D) She is a world - famous singer.</div>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question" id="q17">
+                    <h3>Question 17: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">We</span>
+                        <span class="word">use</span>
+                        <span class="word">wind</span>
+                        <span class="hyphen-spot" data-q="17" data-pos="0"></span>
+                        <span class="word">powered</span>
+                        <span class="hyphen-spot" data-q="17" data-pos="1"></span>
+                        <span class="word">generators.</span>
+                    </div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question" id="q18">
+                    <h3>Question 18: Multiple Choice</h3>
+                    <p>What type of compound adjective is "record-breaking"?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(18, 0)">A) Adjective + Noun</div>
+                        <div class="option" onclick="selectOption(18, 1)">B) Noun + Present Participle</div>
+                        <div class="option" onclick="selectOption(18, 2)">C) Adjective + Past Participle</div>
+                        <div class="option" onclick="selectOption(18, 3)">D) Number + Noun</div>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question" id="q19">
+                    <h3>Question 19: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">I</span>
+                        <span class="word">found</span>
+                        <span class="word">a</span>
+                        <span class="word">long</span>
+                        <span class="hyphen-spot" data-q="19" data-pos="0"></span>
+                        <span class="word">forgotten</span>
+                        <span class="hyphen-spot" data-q="19" data-pos="1"></span>
+                        <span class="word">painting.</span>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question" id="q20">
+                    <h3>Question 20: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">She</span>
+                        <span class="word">wore</span>
+                        <span class="word">tight</span>
+                        <span class="hyphen-spot" data-q="20" data-pos="0"></span>
+                        <span class="word">fitting</span>
+                        <span class="hyphen-spot" data-q="20" data-pos="1"></span>
+                        <span class="word">jeans.</span>
+                    </div>
+                </div>
+
+                <!-- Question 21 -->
+                <div class="question" id="q21">
+                    <h3>Question 21: Multiple Choice</h3>
+                    <p>Which sentence uses "-ly" correctly (no hyphen needed)?</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(21, 0)">A) He was an impressively-dressed man.</div>
+                        <div class="option" onclick="selectOption(21, 1)">B) He was an impressively dressed man.</div>
+                        <div class="option" onclick="selectOption(21, 2)">C) He was an impressivelydressed man.</div>
+                        <div class="option" onclick="selectOption(21, 3)">D) He was an impressively - dressed man.</div>
+                    </div>
+                </div>
+
+                <!-- Question 22 -->
+                <div class="question" id="q22">
+                    <h3>Question 22: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">We</span>
+                        <span class="word">go</span>
+                        <span class="word">to</span>
+                        <span class="word">a</span>
+                        <span class="word">family</span>
+                        <span class="hyphen-spot" data-q="22" data-pos="0"></span>
+                        <span class="word">friendly</span>
+                        <span class="hyphen-spot" data-q="22" data-pos="1"></span>
+                        <span class="word">restaurant.</span>
+                    </div>
+                </div>
+
+                <!-- Question 23 -->
+                <div class="question" id="q23">
+                    <h3>Question 23: Click ALL That Need Hyphens Before a Noun</h3>
+                    <p>Click all phrases that need hyphens when used BEFORE a noun:</p>
+                    <div class="options">
+                        <div class="option" onclick="selectMultiple(23, 0)">A) high quality</div>
+                        <div class="option" onclick="selectMultiple(23, 1)">B) beautifully written</div>
+                        <div class="option" onclick="selectMultiple(23, 2)">C) smoke free</div>
+                        <div class="option" onclick="selectMultiple(23, 3)">D) extremely happy</div>
+                    </div>
+                </div>
+
+                <!-- Question 24 -->
+                <div class="question" id="q24">
+                    <h3>Question 24: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">I</span>
+                        <span class="word">added</span>
+                        <span class="word">sun</span>
+                        <span class="hyphen-spot" data-q="24" data-pos="0"></span>
+                        <span class="word">dried</span>
+                        <span class="hyphen-spot" data-q="24" data-pos="1"></span>
+                        <span class="word">tomatoes.</span>
+                    </div>
+                </div>
+
+                <!-- Question 25 -->
+                <div class="question" id="q25">
+                    <h3>Question 25: Multiple Choice</h3>
+                    <p>In compound adjectives with periods of time, we use the _____ form.</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(25, 0)">A) Plural (three-weeks)</div>
+                        <div class="option" onclick="selectOption(25, 1)">B) Singular (three-week)</div>
+                        <div class="option" onclick="selectOption(25, 2)">C) Either one is fine</div>
+                        <div class="option" onclick="selectOption(25, 3)">D) It depends on the sentence</div>
+                    </div>
+                </div>
+
+                <!-- Question 26 -->
+                <div class="question" id="q26">
+                    <h3>Question 26: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">He</span>
+                        <span class="word">buys</span>
+                        <span class="word">ready</span>
+                        <span class="hyphen-spot" data-q="26" data-pos="0"></span>
+                        <span class="word">made</span>
+                        <span class="hyphen-spot" data-q="26" data-pos="1"></span>
+                        <span class="word">meals.</span>
+                    </div>
+                </div>
+
+                <!-- Question 27 -->
+                <div class="question" id="q27">
+                    <h3>Question 27: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">I</span>
+                        <span class="word">lived</span>
+                        <span class="word">in</span>
+                        <span class="word">an</span>
+                        <span class="word">English</span>
+                        <span class="hyphen-spot" data-q="27" data-pos="0"></span>
+                        <span class="word">speaking</span>
+                        <span class="hyphen-spot" data-q="27" data-pos="1"></span>
+                        <span class="word">country.</span>
+                    </div>
+                </div>
+
+                <!-- Question 28 -->
+                <div class="question" id="q28">
+                    <h3>Question 28: True or False</h3>
+                    <p>"Wind-powered generators" uses a noun + past participle compound adjective.</p>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(28, 0)">True</div>
+                        <div class="option" onclick="selectOption(28, 1)">False</div>
+                    </div>
+                </div>
+
+                <!-- Question 29 -->
+                <div class="question" id="q29">
+                    <h3>Question 29: Click to Add Hyphens</h3>
+                    <p>Click between words where hyphens are needed:</p>
+                    <div class="sentence-builder">
+                        <span class="word">I</span>
+                        <span class="word">made</span>
+                        <span class="word">a</span>
+                        <span class="word">last</span>
+                        <span class="hyphen-spot" data-q="29" data-pos="0"></span>
+                        <span class="word">minute</span>
+                        <span class="hyphen-spot" data-q="29" data-pos="1"></span>
+                        <span class="word">decision.</span>
+                    </div>
+                </div>
+
+                <!-- Question 30 -->
+                <div class="question" id="q30">
+                    <h3>Question 30: Click ALL Correct Sentences</h3>
+                    <p>Click all sentences that are correctly written:</p>
+                    <div class="options">
+                        <div class="option" onclick="selectMultiple(30, 0)">A) The author is well known.</div>
+                        <div class="option" onclick="selectMultiple(30, 1)">B) He is a well-known author.</div>
+                        <div class="option" onclick="selectMultiple(30, 2)">C) She is a largely unknown writer.</div>
+                        <div class="option" onclick="selectMultiple(30, 3)">D) They are slow-moving vehicles.</div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn btn-success" onclick="submitQuiz()">🎯 Submit My Answers! 🎯</button>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results" id="results">
+                    <h2>🎉 Quiz Results! 🎉</h2>
+                    <div class="score" id="score"></div>
+                    <div class="feedback" id="feedback"></div>
+                    <div class="answer-review" id="review"></div>
+                    <button class="btn btn-primary" onclick="retakeQuiz()">🔄 Try Again!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store user answers
+        const userAnswers = {};
+
+        // Initialize all question answers
+        for (let i = 1; i <= 30; i++) {
+            userAnswers['q' + i] = null;
+        }
+
+        // Questions that use multiple selection
+        const multiSelectQuestions = [23, 30];
+        multiSelectQuestions.forEach(q => {
+            userAnswers['q' + q] = [];
+        });
+
+        // Questions with hyphen clicking
+        const hyphenQuestions = [1, 2, 3, 5, 6, 8, 10, 11, 13, 15, 17, 19, 20, 22, 24, 26, 27, 29];
+        hyphenQuestions.forEach(q => {
+            userAnswers['q' + q] = [];
+        });
+
+        // Correct answers
+        const correctAnswers = {
+            q1: [0, 1],      // sister-in-law (click both spots)
+            q2: [0],         // mid-1990s (click spot after "mid")
+            q3: [0],         // forty-two (click between forty and two, NOT after two)
+            q4: 1,           // B
+            q5: [0],         // Three-fourths (click between Three and fourths)
+            q6: [0],         // nine-story (click between nine and story)
+            q7: 1,           // B
+            q8: [0],         // ten-minute (click between ten and minute)
+            q9: 1,           // B
+            q10: [0],        // ex-boyfriend (click between ex and boyfriend)
+            q11: [],         // NO HYPHEN NEEDED (fourth century)
+            q12: 1,          // False
+            q13: [0],        // ice-cold (click between ice and cold)
+            q14: 1,          // B
+            q15: [0],        // mouth-watering (click between mouth and watering)
+            q16: 1,          // B
+            q17: [0],        // wind-powered (click between wind and powered)
+            q18: 1,          // B
+            q19: [0],        // long-forgotten (click between long and forgotten)
+            q20: [0],        // tight-fitting (click between tight and fitting)
+            q21: 1,          // B
+            q22: [0],        // family-friendly (click between family and friendly)
+            q23: [0, 2],     // A and C (high-quality, smoke-free)
+            q24: [0],        // sun-dried (click between sun and dried)
+            q25: 1,          // B
+            q26: [0],        // ready-made (click between ready and made)
+            q27: [0],        // English-speaking (click between English and speaking)
+            q28: 0,          // True
+            q29: [0],        // last-minute (click between last and minute)
+            q30: [0, 1, 2, 3] // All are correct
+        };
+
+        function scrollToQuiz() {
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle hyphen spot clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const hyphenSpots = document.querySelectorAll('.hyphen-spot');
+            hyphenSpots.forEach(spot => {
+                spot.addEventListener('click', function() {
+                    const q = this.getAttribute('data-q');
+                    const pos = parseInt(this.getAttribute('data-pos'));
+                    const key = 'q' + q;
+                    
+                    // Toggle selection
+                    if (this.classList.contains('clicked')) {
+                        this.classList.remove('clicked');
+                        const index = userAnswers[key].indexOf(pos);
+                        if (index > -1) {
+                            userAnswers[key].splice(index, 1);
+                        }
+                    } else {
+                        this.classList.add('clicked');
+                        if (!userAnswers[key].includes(pos)) {
+                            userAnswers[key].push(pos);
+                        }
+                    }
+                });
+            });
+        });
+
+        function selectOption(questionNum, optionIndex) {
+            const question = document.getElementById('q' + questionNum);
+            const options = question.querySelectorAll('.option');
+            
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+            
+            userAnswers['q' + questionNum] = optionIndex;
+        }
+
+        function selectMultiple(questionNum, optionIndex) {
+            const question = document.getElementById('q' + questionNum);
+            const option = question.querySelectorAll('.option')[optionIndex];
+            
+            const key = 'q' + questionNum;
+            const index = userAnswers[key].indexOf(optionIndex);
+            
+            if (index > -1) {
+                userAnswers[key].splice(index, 1);
+                option.classList.remove('selected');
+            } else {
+                userAnswers[key].push(optionIndex);
+                option.classList.add('selected');
+            }
+        }
+
+        function arraysEqual(a, b) {
+            if (a.length !== b.length) return false;
+            const sortedA = [...a].sort((x, y) => x - y);
+            const sortedB = [...b].sort((x, y) => x - y);
+            return sortedA.every((val, idx) => val === sortedB[idx]);
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            let totalQuestions = 30;
+            let reviewHTML = '<h3>📝 Answer Review:</h3>';
+
+            // Question 1
+            if (arraysEqual(userAnswers.q1, correctAnswers.q1)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 1:</strong> Correct! "Sister-in-law" needs hyphens between all three words.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 1:</strong> "Sister-in-law" needs hyphens after "sister" AND after "in".</div>';
+            }
+
+            // Question 2
+            if (arraysEqual(userAnswers.q2, correctAnswers.q2)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 2:</strong> Perfect! "Mid-1990s" needs a hyphen between "mid" and "1990s".</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 2:</strong> You need a hyphen between "mid" and "1990s" to make "mid-1990s".</div>';
+            }
+
+            // Question 3
+            if (arraysEqual(userAnswers.q3, correctAnswers.q3)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 3:</strong> Excellent! "Forty-two" needs ONE hyphen between the two words only.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 3:</strong> "Forty-two" needs ONE hyphen between "forty" and "two" only, not after "two".</div>';
+            }
+
+            // Question 4
+            if (userAnswers.q4 === correctAnswers.q4) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 4:</strong> Correct! "My three-year-old cousin" needs hyphens throughout the compound adjective.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 4:</strong> The correct answer is B: "My three-year-old cousin threw a tantrum."</div>';
+            }
+
+            // Question 5
+            if (arraysEqual(userAnswers.q5, correctAnswers.q5)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 5:</strong> Great! "Three-fourths" needs ONE hyphen between the two words.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 5:</strong> "Three-fourths" needs ONE hyphen between "Three" and "fourths" only.</div>';
+            }
+
+            // Question 6
+            if (arraysEqual(userAnswers.q6, correctAnswers.q6)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 6:</strong> Perfect! "Nine-story" needs a hyphen between the number and the noun.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 6:</strong> "Nine-story" needs ONE hyphen between "nine" and "story" only.</div>';
+            }
+
+            // Question 7
+            if (userAnswers.q7 === correctAnswers.q7) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 7:</strong> Awesome! The hyphen makes a huge difference in meaning!</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 7:</strong> The correct answer is B. First sentence: tiger eats men. Second: man eats tiger.</div>';
+            }
+
+            // Question 8
+            if (arraysEqual(userAnswers.q8, correctAnswers.q8)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 8:</strong> Excellent! "Ten-minute" needs a hyphen between the number and time period.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 8:</strong> "Ten-minute" needs ONE hyphen between "ten" and "minute" only.</div>';
+            }
+
+            // Question 9
+            if (userAnswers.q9 === correctAnswers.q9) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 9:</strong> Correct! "Self-absorbed" needs a hyphen.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 9:</strong> The correct answer is B: "Yeah, he\'s pretty self-absorbed."</div>';
+            }
+
+            // Question 10
+            if (arraysEqual(userAnswers.q10, correctAnswers.q10)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 10:</strong> Perfect! "Ex-boyfriend" needs a hyphen.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 10:</strong> "Ex-boyfriend" needs ONE hyphen between "ex" and "boyfriend" only.</div>';
+            }
+
+            // Question 11
+            if (arraysEqual(userAnswers.q11, correctAnswers.q11)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 11:</strong> Excellent! "Fourth century" comes AFTER the noun, so NO hyphen needed!</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 11:</strong> NO hyphen needed! "Fourth century" comes AFTER the noun "she lived during", so no hyphen.</div>';
+            }
+
+            // Question 12
+            if (userAnswers.q12 === correctAnswers.q12) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 12:</strong> Correct! We DON\'T use hyphens with "-ly" words.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 12:</strong> FALSE is correct! Never use hyphens with "-ly" words.</div>';
+            }
+
+            // Question 13
+            if (arraysEqual(userAnswers.q13, correctAnswers.q13)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 13:</strong> Perfect! "Ice-cold" needs a hyphen (noun + adjective).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 13:</strong> "Ice-cold" needs ONE hyphen between "ice" and "cold" only.</div>';
+            }
+
+            // Question 14
+            if (userAnswers.q14 === correctAnswers.q14) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 14:</strong> Right! We usually DON\'T use hyphens when compound adjectives come after nouns.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 14:</strong> The correct answer is B. Usually no hyphens after the noun!</div>';
+            }
+
+            // Question 15
+            if (arraysEqual(userAnswers.q15, correctAnswers.q15)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 15:</strong> Excellent! "Mouth-watering" needs a hyphen (noun + present participle).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 15:</strong> "Mouth-watering" needs ONE hyphen between "mouth" and "watering" only.</div>';
+            }
+
+            // Question 16
+            if (userAnswers.q16 === correctAnswers.q16) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 16:</strong> Perfect! "World-famous" needs a hyphen (noun + adjective).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 16:</strong> The correct answer is B: "She is a world-famous singer."</div>';
+            }
+
+            // Question 17
+            if (arraysEqual(userAnswers.q17, correctAnswers.q17)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 17:</strong> Great! "Wind-powered" needs a hyphen (noun + past participle).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 17:</strong> "Wind-powered" needs ONE hyphen between "wind" and "powered" only.</div>';
+            }
+
+            // Question 18
+            if (userAnswers.q18 === correctAnswers.q18) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 18:</strong> Correct! "Record-breaking" is Noun + Present Participle.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 18:</strong> The correct answer is B: Noun + Present Participle.</div>';
+            }
+
+            // Question 19
+            if (arraysEqual(userAnswers.q19, correctAnswers.q19)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 19:</strong> Perfect! "Long-forgotten" needs a hyphen (adjective + past participle).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 19:</strong> "Long-forgotten" needs ONE hyphen between "long" and "forgotten" only.</div>';
+            }
+
+            // Question 20
+            if (arraysEqual(userAnswers.q20, correctAnswers.q20)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 20:</strong> Excellent! "Tight-fitting" needs a hyphen (adjective + present participle).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 20:</strong> "Tight-fitting" needs ONE hyphen between "tight" and "fitting" only.</div>';
+            }
+
+            // Question 21
+            if (userAnswers.q21 === correctAnswers.q21) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 21:</strong> Correct! No hyphen needed with "-ly" words!</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 21:</strong> The correct answer is B. Never use hyphens with "-ly" words.</div>';
+            }
+
+            // Question 22
+            if (arraysEqual(userAnswers.q22, correctAnswers.q22)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 22:</strong> Great! "Family-friendly" needs a hyphen (noun + adjective).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 22:</strong> "Family-friendly" needs ONE hyphen between "family" and "friendly" only.</div>';
+            }
+
+            // Question 23
+            if (arraysEqual(userAnswers.q23, correctAnswers.q23)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 23:</strong> Perfect! A (high-quality) and C (smoke-free) need hyphens. B and D have "-ly" words!</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 23:</strong> The correct answers are A and C. Options B and D have "-ly" words, so NO hyphens!</div>';
+            }
+
+            // Question 24
+            if (arraysEqual(userAnswers.q24, correctAnswers.q24)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 24:</strong> Excellent! "Sun-dried" needs a hyphen (noun + past participle).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 24:</strong> "Sun-dried" needs ONE hyphen between "sun" and "dried" only.</div>';
+            }
+
+            // Question 25
+            if (userAnswers.q25 === correctAnswers.q25) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 25:</strong> Correct! Always use SINGULAR form in compound adjectives!</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 25:</strong> The correct answer is B: Singular (three-week). Always singular!</div>';
+            }
+
+            // Question 26
+            if (arraysEqual(userAnswers.q26, correctAnswers.q26)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 26:</strong> Perfect! "Ready-made" needs a hyphen (adjective + past participle).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 26:</strong> "Ready-made" needs ONE hyphen between "ready" and "made" only.</div>';
+            }
+
+            // Question 27
+            if (arraysEqual(userAnswers.q27, correctAnswers.q27)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 27:</strong> Excellent! "English-speaking" needs a hyphen (noun + present participle).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 27:</strong> "English-speaking" needs ONE hyphen between "English" and "speaking" only.</div>';
+            }
+
+            // Question 28
+            if (userAnswers.q28 === correctAnswers.q28) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 28:</strong> True! "Wind" is a noun and "powered" is a past participle.</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 28:</strong> TRUE is correct! "Wind-powered" is noun + past participle.</div>';
+            }
+
+            // Question 29
+            if (arraysEqual(userAnswers.q29, correctAnswers.q29)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 29:</strong> Perfect! "Last-minute" needs a hyphen (adjective + noun).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 29:</strong> "Last-minute" needs ONE hyphen between "last" and "minute" only.</div>';
+            }
+
+            // Question 30
+            if (arraysEqual(userAnswers.q30, correctAnswers.q30)) {
+                score++;
+                reviewHTML += '<div class="answer-item correct">✅ <strong>Question 30:</strong> Outstanding! All four sentences are correct! A (after noun, no hyphen), B (before noun, with hyphen), C (no hyphen with "-ly"), D (before noun, with hyphen).</div>';
+            } else {
+                reviewHTML += '<div class="answer-item incorrect">❌ <strong>Question 30:</strong> All four are correct! A shows hyphen rule (after noun), B (before noun), C (no hyphen with "-ly"), D (before noun with hyphen).</div>';
+            }
+
+            // Calculate percentage
+            const percentage = Math.round((score / totalQuestions) * 100);
+            
+            // Display results
+            document.getElementById('results').style.display = 'block';
+            
+            const scoreElement = document.getElementById('score');
+            scoreElement.textContent = score + ' / ' + totalQuestions + ' (' + percentage + '%)';
+            
+            // Set score color and feedback
+            const feedbackElement = document.getElementById('feedback');
+            if (percentage >= 90) {
+                scoreElement.className = 'score excellent';
+                feedbackElement.innerHTML = '🌟 OUTSTANDING! You\'re a compound adjective master! 🌟<br>You really understand hyphens!';
+                feedbackElement.style.background = 'linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)';
+            } else if (percentage >= 75) {
+                scoreElement.className = 'score good';
+                feedbackElement.innerHTML = '👏 GREAT JOB! You\'ve got a good grasp on this! 👏<br>Review the ones you missed and you\'ll be perfect!';
+                feedbackElement.style.background = 'linear-gradient(135deg, #fdeb71 0%, #f8d800 100%)';
+            } else if (percentage >= 60) {
+                scoreElement.className = 'score good';
+                feedbackElement.innerHTML = '😊 Good effort! You\'re getting there! 😊<br>Study the review section and try again!';
+                feedbackElement.style.background = 'linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%)';
+            } else {
+                scoreElement.className = 'score needs-practice';
+                feedbackElement.innerHTML = '💪 Keep practicing! 💪<br>Review the lessons above and try the quiz again. You\'ve got this!';
+                feedbackElement.style.background = 'linear-gradient(135deg, #fab1a0 0%, #ff7675 100%)';
+            }
+
+            document.getElementById('review').innerHTML = reviewHTML;
+
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function retakeQuiz() {
+            // Reset all answers
+            for (let key in userAnswers) {
+                if (Array.isArray(userAnswers[key])) {
+                    userAnswers[key] = [];
+                } else {
+                    userAnswers[key] = null;
+                }
+            }
+
+            // Clear all selections
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct-answer', 'wrong-answer');
+            });
+
+            // Clear hyphen spots
+            document.querySelectorAll('.hyphen-spot').forEach(spot => {
+                spot.classList.remove('clicked', 'correct-hyphen', 'wrong-hyphen');
+            });
+
+            // Hide results
+            document.getElementById('results').style.display = 'none';
+
+            // Scroll to quiz
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
